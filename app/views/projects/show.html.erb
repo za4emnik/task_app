@@ -1,0 +1,50 @@
+<p>
+  <strong>ID:</strong>
+  <%= @project.id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<h2>Add a task:</h2>
+
+<% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@task.errors.count, "error") %> prohibited
+      this task from being saved:
+    </h2>
+    <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for([@project, @project.tasks.build]) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :status %><br>
+    <%= f.select :status, ['new', 'in_process', 'done'] %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+  <% end %>
+
+  <h2>All Tasks in this project</h2>
+  <% @project.tasks.each do |task| %>
+  <p>
+    <strong>Task Name:</strong>
+    <%= task.name %>
+    <%= link_to 'Delete Task', [task.project, task],
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
