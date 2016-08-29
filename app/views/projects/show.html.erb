@@ -1,21 +1,15 @@
 <p>
-  <strong>ID:</strong>
-  <%= @project.id %>
+  <%= @project.id %>. <strong><%= @project.name %></strong>
 </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<h2>Add a task:</h2>
+<h3>Add a task:</h3>
 
 <% if @task.errors.any? %>
   <div id="error_explanation">
-    <h2>
+    <h3>
       <%= pluralize(@task.errors.count, "error") %> prohibited
       this task from being saved:
-    </h2>
+    </h3>
     <ul>
       <% @task.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -31,7 +25,7 @@
   </p>
   <p>
     <%= f.label :status %><br>
-    <%= f.select :status, ['new', 'in_process', 'done'] %>
+    <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]) %>
   </p>
   <p>
     <%= f.submit %>
@@ -39,12 +33,25 @@
   <% end %>
 
   <h2>All Tasks in this project</h2>
-  <% @project.tasks.each do |task| %>
-  <p>
-    <strong>Task Name:</strong>
-    <%= task.name %>
-    <%= link_to 'Delete Task', [task.project, task],
-            method: :delete,
-            data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th colspan="3">Action</th>
+    </tr>
+
+    <% @project.tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.name %></td>
+        <td><%= task.status %></td>
+        <% unless task.id.nil? %>
+        <td><%= link_to 'Edit', edit_project_task_path(task.project, task ) %></td>
+        <td><%= link_to 'Delete', [task.project, task],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+      </tr>
+    <% end %>
+  </table>
