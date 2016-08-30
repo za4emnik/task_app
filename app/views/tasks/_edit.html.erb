@@ -1,0 +1,17 @@
+<%= form_for :task, url: project_task_path(@task.project, @task), method: :patch, remote: true do |f| %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :status %><br>
+    <%= select_tag :status, options_for_select([ "new", "in_process", "done" ], @task.status) %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

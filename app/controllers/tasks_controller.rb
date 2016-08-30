@@ -3,10 +3,9 @@ class TasksController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.new(task_params)
-    if @task.save
-      redirect_to project_path(@project)
-    else
-      render 'projects/show'
+    respond_to do |format|
+      if @task.save
+        format.js {}
     end
   end
 
@@ -18,10 +17,9 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
 
-    if @task.update(task_params)
-      redirect_to project_path(@project)
-    else
-      render 'edit'
+    respond_to do |format|
+      if @task.update(task_params)
+        format.js {}
     end
   end
 
@@ -29,7 +27,9 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
     @task.destroy
-    redirect_to project_path(@project)
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   private

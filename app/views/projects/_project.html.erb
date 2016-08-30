@@ -1,0 +1,4 @@
+<p><%= project.name %></p>
+<%= link_to 'Delete', project_path(project), remote: true,
+      method: :delete,
+      data: { confirm: 'Are you sure?' } %>

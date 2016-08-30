@@ -15,32 +15,44 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+
+    respond_to do |format|
+        format.html { redirect_to @project}
+        format.js   {}
+    end
   end
 
   def create
     @project = Project.new(project_params)
-    if @project.save
-      redirect_to @project
-    else
-      render 'new'
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to @project}
+        format.js   {}
+      else
+        format.html { render action: "new" }
+      end
     end
   end
 
   def update
     @project = Project.find(params[:id])
 
-    if @project.update(project_params)
-      redirect_to @project
-    else
-      render 'edit'
+    respond_to do |format|
+      if @project.update(project_params)
+        format.js   {}
+      else
+        render 'edit'
+      end
     end
   end
 
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-
-    redirect_to projects_path
+    respond_to do |format|
+      format.html { redirect_to projects_path}
+      format.js {}
+    end
   end
 
   private
