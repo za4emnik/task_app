@@ -5,7 +5,8 @@ class TasksController < ApplicationController
     @task = @project.tasks.new(task_params)
     respond_to do |format|
       if @task.save
-        format.js {}
+        format.js {  }
+      end
     end
   end
 
@@ -20,6 +21,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.js {}
+      end
     end
   end
 

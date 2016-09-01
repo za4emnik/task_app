@@ -24,6 +24,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @task = Task.new
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project}

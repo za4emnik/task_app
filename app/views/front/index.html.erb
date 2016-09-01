@@ -1,50 +1,43 @@
-<h1>Projects</h1>
+<h1 class="text-center">SIMPLE TODO LIST</h1>
 
 <div class='container'>
-<div id='new_project'>
-  <%= link_to 'New Project', new_project_path , remote: true%>
-</div>
+<div id='new_project' class='text-center'>
+  <%= link_to 'Add TODO List', new_project_path , remote: true, :class => "btn btn-primary"  %>
+</div><br>
 
-<% @projects.each do |project| %>
-  <div id='projects'>
-    <div id=<%= dom_id project %>>
-      <%= project.name %>
-      <%= link_to 'Delete', project_path(project), remote: true,
+<div id='projects'>
+  <% @projects.each do |project| %>
+
+  <div id=<%= dom_id project %>>
+      <div class='text-center navbar-default project-head'>
+        <%= project.name %>
+        <%= link_to 'Delete', project_path(project), remote: true,
             method: :delete,
             data: { confirm: 'Are you sure?' } %>
-      <%= link_to 'Edit', edit_project_path(project), remote: true %>
+        <%= link_to 'Edit', edit_project_path(project), remote: true %>
+      </div>
 
+      <div class='text-center navbar-default' id='new_task_<%= dom_id project %>'>
       <%= form_for([project, @task], remote: true) do |f| %>
-        <p>
-          <%= f.label :name %><br>
           <%= f.text_field :name %>
-        </p>
-        <p>
-          <%= f.label :status %><br>
           <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]) %>
-        </p>
-        <p>
           <%= f.submit %>
-        </p>
-        <% end %>
-
-    </div>
-  </div>
-
-<% unless project.tasks.empty? %>
-<div id='edit_task'></div>
-  <table id='tasks'>
-    <% project.tasks.each do |task| %>
-    <tr id=<%= dom_id task %>>
-      <td><%= task.name %></td>
-      <td><%= task.status %></td>
-      <td><%= link_to 'Edit', edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' %></td>
-      <td><%= link_to 'Delete', [task.project, task], remote: true,
+      <% end %>
+      </div>
+      <table id='tasks_<%= dom_id project %>' class='table table-hover'>
+        <% unless project.tasks.empty? %>
+        <% project.tasks.each do |task| %>
+          <tr id=<%= dom_id task %> class='row'>
+            <td><h3><%= task.name %></h3></td>
+            <td><h3><%= task.status %></h3></td>
+            <td><%= link_to 'Edit', edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' %></td>
+            <td><%= link_to 'Delete', [task.project, task], remote: true,
               method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </table>
+          </tr>
+        <% end %>
+        <% end %>
+    </table><br>
+</div>
 <% end %>
-
-<% end %>
+</div>
 </div>

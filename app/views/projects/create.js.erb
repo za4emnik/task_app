@@ -1,1 +1,2 @@
 $("<%= escape_javascript(render @project) %>").appendTo("#projects");
+$("#new_project").html('<%= link_to "Add TODO List", new_project_path , remote: true, :class => "btn btn-primary"  %>');

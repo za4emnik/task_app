@@ -1,1 +1,2 @@
-$("<%= escape_javascript(render @task) %>").html("#project_<%= @project.id %>");
+$("#task_<%= @task.id %>").html("<%= j (render 'update') %>");
+$("#edit_task_<%= @task.id %>").remove();
