@@ -1,43 +1,50 @@
 <h1 class="text-center">SIMPLE TODO LIST</h1>
+<% if user_signed_in? %>
+    <span>Здравствуйте, <%= current_user.email %></span>
+    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 
-<div class='container'>
-<div id='new_project' class='text-center'>
-  <%= link_to 'Add TODO List', new_project_path , remote: true, :class => "btn btn-primary"  %>
-</div><br>
+    <div class='container'>
+    <div id='new_project' class='text-center'>
+      <%= link_to 'Add TODO List', new_project_path , remote: true, :class => "btn btn-primary"  %>
+    </div><br>
 
-<div id='projects'>
-  <% @projects.each do |project| %>
+    <div id='projects'>
+      <% @projects.each do |project| %>
 
-  <div id=<%= dom_id project %>>
-      <div class='text-center navbar-default project-head'>
-        <%= project.name %>
-        <%= link_to 'Delete', project_path(project), remote: true,
-            method: :delete,
-            data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Edit', edit_project_path(project), remote: true %>
-      </div>
+      <div id=<%= dom_id project %>>
+          <div class='text-center navbar-default project-head'>
+            <%= project.name %>
+            <%= link_to 'Delete', project_path(project), remote: true,
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Edit', edit_project_path(project), remote: true %>
+          </div>
 
-      <div class='text-center navbar-default' id='new_task_<%= dom_id project %>'>
-      <%= form_for([project, @task], remote: true) do |f| %>
-          <%= f.text_field :name %>
-          <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]) %>
-          <%= f.submit %>
-      <% end %>
-      </div>
-      <table id='tasks_<%= dom_id project %>' class='table table-hover'>
-        <% unless project.tasks.empty? %>
-        <% project.tasks.each do |task| %>
-          <tr id=<%= dom_id task %> class='row'>
-            <td><h3><%= task.name %></h3></td>
-            <td><h3><%= task.status %></h3></td>
-            <td><%= link_to 'Edit', edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' %></td>
-            <td><%= link_to 'Delete', [task.project, task], remote: true,
-              method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-        <% end %>
-    </table><br>
-</div>
+          <div class='text-center navbar-default' id='new_task_<%= dom_id project %>'>
+          <%= form_for([project, @task], remote: true) do |f| %>
+              <%= f.text_field :name %>
+              <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]) %>
+              <%= f.submit %>
+          <% end %>
+          </div>
+          <table id='tasks_<%= dom_id project %>' class='table table-hover'>
+            <% unless project.tasks.empty? %>
+            <% project.tasks.each do |task| %>
+              <tr id=<%= dom_id task %> class='row'>
+                <td><h3><%= task.name %></h3></td>
+                <td><h3><%= task.status %></h3></td>
+                <td><%= link_to 'Edit', edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' %></td>
+                <td><%= link_to 'Delete', [task.project, task], remote: true,
+                  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+            <% end %>
+        </table><br>
+    </div>
+    <% end %>
+    </div>
+    </div>
+
+<% else %>
+    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
-</div>
-</div>
