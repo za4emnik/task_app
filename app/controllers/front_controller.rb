@@ -3,7 +3,7 @@ class FrontController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @projects = Project.all
+    @projects = Project.where("user_id = ?", current_user)
     @project = Project.new
     @task = Task.new
     respond_to do |format|

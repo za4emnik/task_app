@@ -1,9 +1,11 @@
+<div class='container'>
 <h1 class="text-center">SIMPLE TODO LIST</h1>
 <% if user_signed_in? %>
+  <div class='wellcome-message'>
     <span>Здравствуйте, <%= current_user.email %></span>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+  </div>
 
-    <div class='container'>
     <div id='new_project' class='text-center'>
       <%= link_to 'Add TODO List', new_project_path , remote: true, :class => "btn btn-primary"  %>
     </div><br>
