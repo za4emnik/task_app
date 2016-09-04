@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  respond_to :json
 
   def index
     @projects = Project.all
@@ -15,45 +16,22 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-
-    respond_to do |format|
-        format.html { redirect_to @project}
-        format.js   {}
-    end
   end
 
   def create
     @project = Project.new(project_params)
     @task = Task.new
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project}
-        format.js   {}
-      else
-        format.html { render action: "new" }
-      end
-    end
+    @project.save
   end
 
   def update
     @project = Project.find(params[:id])
-
-    respond_to do |format|
-      if @project.update(project_params)
-        format.js   {}
-      else
-        render 'edit'
-      end
-    end
+    @project.update(project_params)
   end
 
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_path}
-      format.js {}
-    end
   end
 
   private

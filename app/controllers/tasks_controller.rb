@@ -1,13 +1,10 @@
 class TasksController < ApplicationController
+  respond_to :json
 
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.new(task_params)
-    respond_to do |format|
-      if @task.save
-        format.js {  }
-      end
-    end
+    @task.save
   end
 
   def edit
@@ -17,21 +14,13 @@ class TasksController < ApplicationController
   def update
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
-
-    respond_to do |format|
-      if @task.update(task_params)
-        format.js {}
-      end
-    end
+    @task.update(task_params)
   end
 
   def destroy
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
     @task.destroy
-    respond_to do |format|
-      format.js {}
-    end
   end
 
   private

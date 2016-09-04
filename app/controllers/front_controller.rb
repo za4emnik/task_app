@@ -1,15 +1,13 @@
 class FrontController < ApplicationController
 
   before_filter :authenticate_user!
+  respond_to :json
+
 
   def index
     @projects = Project.where("user_id = ?", current_user)
     @project = Project.new
     @task = Task.new
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
 
   def all_projects
