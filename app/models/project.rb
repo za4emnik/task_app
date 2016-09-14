@@ -3,4 +3,6 @@ class Project < ApplicationRecord
   belongs_to :user
   validates :name, presence: true,
                     length: { minimum: 3 }
+
+  #scope :statuses,  -> { order('id DESC') }
 end

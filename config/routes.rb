@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :tasks
   end
   get '/', to: 'front#index'
+  get '/filter', to: 'front#filter'
   root 'front#index'
 end
