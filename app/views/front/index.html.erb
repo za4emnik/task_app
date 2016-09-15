@@ -1,11 +1,12 @@
 <div class='container'>
 <h1 class="text-center">SIMPLE TODO LIST</h1>
 <% if user_signed_in? %>
-  <div class='wellcome-message'>
+  <div class='wellcome-message well'>
     <span>Hello, <%= current_user.email %></span>
     <%= link_to 'Sing out', destroy_user_session_path, :method => :delete %>
   </div>
 
+<p>SQL filter for all:</p>
   <%= select_tag(:filter, options_for_select([['none', 'none'],
    ['all iniq statuses', 'statuses'],
    ['count all tasks in each project', 'count-tasks'],
@@ -15,50 +16,73 @@
    ['list of tasks with duplicate names, asc', 'tasks-dup'],
    ['list of tasks GARAGE with mathes', 'tasks-garage'],
    ['list of project names having more than 10 tasks in status ‘done’', 'tasks-ten-done']
-    ]), :onchange=>'filter(this)') %>
+  ]), :onchange=>'filter(this)') %>
+  <br /><br />
 
   <div id='filter-block'>
   </div>
 
     <div id='new_project' class='text-center'>
-      <%= link_to 'Add TODO List', new_project_path , remote: true, :class => "btn btn-primary"  %>
+      <%= link_to new_project_path , remote: true, :class => "btn btn-primary"  do %>
+        <span class='glyphicon glyphicon-plus'></span> Add TODO List
+      <% end %>
     </div><br>
 
     <div id='projects'>
       <% @projects.each do |project| %>
 
-      <div id=<%= dom_id project %>>
+      <div id=<%= dom_id project %> class='panel panel-primary'>
           <div class='text-center navbar-default project-head'>
-            <%= project.name %>
-            <%= link_to 'Delete', project_path(project), remote: true,
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-            <%= link_to 'Edit', edit_project_path(project), remote: true %>
+            <div class='col-md-8'>
+              <span class="glyphicon glyphicon-calendar calendar"></span><span class='name'><%= project.name %></span>
+            </div>
+            <div class='col-md-4'>
+              <%= link_to project_path(project), remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="glyphicon glyphicon-trash trash"></i>
+              <% end %>
+              <%= link_to edit_project_path(project), remote: true do %>
+                <i class="glyphicon glyphicon-pencil pencil"></i>
+              <% end %>
+            </div>
           </div>
 
           <div class='text-center navbar-default' id='new_task_<%= dom_id project %>'>
           <%= form_for([project, @task], remote: true) do |f| %>
-              <%= f.text_field :name %>
-              <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]) %>
-              <%= f.submit %>
-          <% end %>
+            <div class='col-md-1'>
+              <span class='glyphicon glyphicon-plus plus'></span>
+            </div>
+            <div class='col-md-7'>
+              <%= f.text_field :name, class: 'form-control', placeholder: 'Enter new task' %>
+            </div>
+            <div class='col-md-2'>
+              <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]), class: 'form-control' %>
+            </div>
+            <div class='col-md-2'>
+              <%= f.submit class: 'btn btn-default'%>
+              <% end %>
+            </div>
+            </div>
           </div>
           <table id='tasks_<%= dom_id project %>' class='table table-hover'>
             <% unless project.tasks.empty? %>
             <% project.tasks.each do |task| %>
-              <tr id=<%= dom_id task %> class='row'>
-                <td><h3><%= task.name %></h3></td>
-                <td><h3><%= task.status %></h3></td>
-                <td><%= link_to 'Edit', edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' %></td>
-                <td><%= link_to 'Delete', [task.project, task], remote: true,
-                  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <tr id=<%= dom_id task %> class='row <%= task.status %>'>
+                <td><p><%= task.name %></p></td>
+                <td><p><%= task.status %></p></td>
+                <td><%= link_to edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' do %>
+                      <i class="glyphicon glyphicon-pencil pencil"></i>
+                    <% end %>
+                </td>
+                <td><%= link_to [task.project, task], remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                      <i class="glyphicon glyphicon-trash trash"></i>
+                    <% end %>
+                </td>
               </tr>
             <% end %>
             <% end %>
         </table><br>
-    </div>
     <% end %>
-    </div>
+  </div>
     </div>
 
 <% else %>

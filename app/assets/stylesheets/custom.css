@@ -1,5 +1,34 @@
 .project-head{
-  background: #A6C4E6;
+  background: #337ab7;
+  height: 71px;
+}
+.project-head .name{
+  padding-left:10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+}
+.project-head .trash, .project-head .pencil{
+  color:#333;
+  font-size: 33px;
+  top: 18px;
+}
+.new_task input, .new_task select{
+  width: 100%;
+}
+.new_task div{
+  padding: 0;
+}
+.new_task .plus{
+  padding-top: 10px !important;
+}
+.done p{
+  color: #8bffd8;
+  text-decoration: line-through;
+}
+.calendar{
+  font-size: 45px;
+  padding: 10px 5px;
 }
 .tasks{
   background: #f4ebff;
@@ -9,5 +38,10 @@
   margin: 0 auto;
 }
 .wellcome-message{
-  text-align: right;
+  text-align: center;
+  width: 250px;
+  float: right;
+}
+#projects .panel{
+
 }
