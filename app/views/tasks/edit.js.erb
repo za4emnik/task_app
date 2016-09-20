@@ -1,4 +1,3 @@
-if (!$("#edit_task_<%= @task.id %>").is("#project_<%= @task.project_id %>")){
-  $("#new_task_project_<%= @task.project_id %>").after('<div id="edit_task_<%= @task.id %>"></div>');
-}
-$("#edit_task_<%= @task.id %>").html("<%= j (render 'edit') %>");
+$("#myModal .modal-title").text("Edit task: <%= @task.name %>");
+$("#myModal .modal-body").html("<%= j (render 'edit') %>");
+$('#myModal').modal("show");

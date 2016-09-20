@@ -1,1 +1,2 @@
-$("#project_<%= @project.id %> > .project-head").html("<%= j (render 'head') %>");
+$('#myModal').modal("hide");
+$("#project_<%= @project.id %> .name").text("<%= @project.name %>");

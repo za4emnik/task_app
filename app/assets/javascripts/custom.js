@@ -11,7 +11,7 @@ function filter(v){
 
 function prepareData(data, v){
   $('#filter-block').empty();
-
+  $('#filter-block').show();
   if(v == 'statuses'){
     data.forEach(function(item, i, data){
       $('#filter-block').append('<p>'+item.status+'</p>');
@@ -29,4 +29,8 @@ function prepareData(data, v){
         $('#filter-block').append('<p>'+item.name+'</p>'+'<p>'+item.status+'</p>');
       })
   }
+  if ($('#filter-block').find('*').length == 0 && (v != 'none')) {
+    $('#filter-block').append('Nothing found');
+  }
+  if(v == 'none') $('#filter-block').fadeOut(300);
 }

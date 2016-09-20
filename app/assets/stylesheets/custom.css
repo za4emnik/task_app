@@ -1,4 +1,4 @@
-.project-head{
+/*.project-head{
   background: #337ab7;
   height: 71px;
 }
@@ -22,10 +22,6 @@
 .new_task .plus{
   padding-top: 10px !important;
 }
-.done p{
-  color: #8bffd8;
-  text-decoration: line-through;
-}
 .calendar{
   font-size: 45px;
   padding: 10px 5px;
@@ -39,9 +35,51 @@
 }
 .wellcome-message{
   text-align: center;
-  width: 250px;
-  float: right;
+}*/
+.new_task input, .new_task select{
+  width: 100%;
 }
-#projects .panel{
-
+#projects .panel-heading{
+  height:70px;
+}
+#projects .panel-heading .trash, #projects .panel-heading .pencil{
+  color: #fff;
+  opacity: 0.7;
+  padding-right: 10px;
+  font-size: 33px;
+  top: 11px;
+}
+#projects .panel-heading .name{
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  padding: 7px;
+}
+#projects .panel-heading .calendar{
+  font-size: 45px;
+}
+#projects .panel-heading{
+  /*background: #fefcea; /* Для старых браузров */
+  /*background: linear-gradient(to top, #fefcea, #f1da36); */
+  background-color: #337ab7;
+  background-image: none;
+}
+#projects .panel-body .plus{
+  top:8px;
+  color: #007a00;
+}
+td{
+  position: relative
+}
+tr.done td:before{
+	  content: '';
+	  position: absolute;
+	  top: 38%;
+	  left: 0px;
+	  right: 0px;
+	  height: 1px;
+	  border-top: 2px solid #8bffd8;
+}
+.done{
+  color: #8bffd8;
 }

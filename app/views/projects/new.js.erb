@@ -1,1 +1,3 @@
-$('#new_project').html("<%= j (render 'new') %>");
+$("#myModal .modal-title").text("Create project");
+$("#myModal .modal-body").html("<%= j (render 'new') %>");
+$('#myModal').modal("show");
