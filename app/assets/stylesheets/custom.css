@@ -1,41 +1,3 @@
-/*.project-head{
-  background: #337ab7;
-  height: 71px;
-}
-.project-head .name{
-  padding-left:10px;
-  font-size: 25px;
-  font-weight: bold;
-  color: #fff;
-}
-.project-head .trash, .project-head .pencil{
-  color:#333;
-  font-size: 33px;
-  top: 18px;
-}
-.new_task input, .new_task select{
-  width: 100%;
-}
-.new_task div{
-  padding: 0;
-}
-.new_task .plus{
-  padding-top: 10px !important;
-}
-.calendar{
-  font-size: 45px;
-  padding: 10px 5px;
-}
-.tasks{
-  background: #f4ebff;
-  margin-bottom: 130px;
-}
-.login-input{
-  margin: 0 auto;
-}
-.wellcome-message{
-  text-align: center;
-}*/
 .new_task input, .new_task select{
   width: 100%;
 }
@@ -59,8 +21,6 @@
   font-size: 45px;
 }
 #projects .panel-heading{
-  /*background: #fefcea; /* Для старых браузров */
-  /*background: linear-gradient(to top, #fefcea, #f1da36); */
   background-color: #337ab7;
   background-image: none;
 }
@@ -82,4 +42,7 @@ tr.done td:before{
 }
 .done{
   color: #8bffd8;
+}
+.login-input{
+  margin: 0 auto;
 }

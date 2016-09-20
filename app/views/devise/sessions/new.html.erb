@@ -1,7 +1,7 @@
 <div class='container text-center'>
 <h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, class: 'text-center', url: session_path(resource_name)) do |f| %>
     <div class="input-group login-input">
       <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'your mail' %>
     </div><br />
