@@ -1,3 +1,15 @@
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  background: linear-gradient(to top, #ffffff, #9ed0fb);
+  background-repeat: no-repeat;
+}
+select{
+  border-radius: 7px;
+  height: 33px;
+}
 .new_task input, .new_task select{
   width: 100%;
 }
@@ -19,6 +31,7 @@
 }
 #projects .panel-heading .calendar{
   font-size: 45px;
+  color: #ffffff;
 }
 #projects .panel-heading{
   background-color: #337ab7;
@@ -27,22 +40,46 @@
 #projects .panel-body .plus{
   top:8px;
   color: #007a00;
+  position: absolute;
 }
 td{
   position: relative
 }
 tr.done td:before{
-	  content: '';
-	  position: absolute;
-	  top: 38%;
-	  left: 0px;
-	  right: 0px;
-	  height: 1px;
-	  border-top: 2px solid #8bffd8;
+	content: '';
+	position: absolute;
+  top: 38%;
+	left: 0px;
+	right: 0px;
+	height: 1px;
+	border-top: 2px solid #8bffd8;
 }
 .done{
   color: #8bffd8;
 }
 .login-input{
   margin: 0 auto;
+}
+.new_task_select{
+  background: rgb(0, 152, 0) none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+  border: medium none;
+  width: 100%;
+}
+.new_task_select:hover{
+  background: rgb(0, 174, 0) none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+}
+.panel-body div{
+  padding: 0;
+}
+.wellcome-message{
+  text-align: right;
+}
+.panel-body #task_name{
+  margin-left: 20px;
+  width:97%;
+}
+.actions input{
+  border-radius: 7px;
 }

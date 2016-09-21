@@ -2,7 +2,7 @@
 <h1 class="text-center">SIMPLE TODO LIST</h1>
 <% if user_signed_in? %>
   <div calss='row'>
-    <div class='col-md-8'>
+    <div class='col-md-9'>
       <p>SQL filter for all:</p>
         <%= select_tag(:filter, options_for_select([['none', 'none'],
          ['all iniq statuses', 'statuses'],
@@ -16,8 +16,8 @@
         ]), :onchange=>'filter(this)') %>
         <br /><br />
     </div>
-    <div class='col-md-4 wellcome-message well'>
-      <span>Hello, <%= current_user.email %></span>
+    <div class='col-md-3 wellcome-message well'>
+      <span>Hello, <%= current_user.email %></span><br>
       <%= link_to 'Sing out', destroy_user_session_path, :method => :delete %>
     </div>
   </div>
@@ -42,7 +42,7 @@
               <span class="glyphicon glyphicon-calendar calendar pull-left"></span>
               <p class='name pull-left'><%= project.name %></p>
             </div>
-            <div class='col-md-2 col-md-offset-4 actions'>
+            <div class='col-md-2 col-md-offset-4'>
               <%= link_to project_path(project), remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
                 <i class="glyphicon glyphicon-trash trash pull-right"></i>
               <% end %>
@@ -54,17 +54,14 @@
 
           <div class='panel-body' id='new_task_<%= dom_id project %>'>
           <%= form_for([project, @task], remote: true) do |f| %>
-            <div class='col-md-1'>
-              <span class='glyphicon glyphicon-plus plus pull-right'></span>
-            </div>
-            <div class='col-md-7'>
-              <%= f.text_field :name, class: 'form-control', placeholder: 'Enter new task' %>
+            <div class='col-md-8'>
+              <span class='glyphicon glyphicon-plus plus'></span><%= f.text_field :name, class: 'form-control', placeholder: 'Enter new task' %>
             </div>
             <div class='col-md-2'>
               <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]), class: 'form-control' %>
             </div>
             <div class='col-md-2'>
-              <%= f.submit class: 'btn btn-default'%>
+              <%= f.submit class: 'btn btn-default new_task_select'%>
               <% end %>
             </div>
           </div>
